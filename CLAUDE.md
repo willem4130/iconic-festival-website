@@ -1,118 +1,133 @@
-# Simplicate Automations
+# Iconic Festival Website
 
-Production-ready automation system for Simplicate that handles contract distribution, hours reminders, and invoice generation with a full-stack Next.js admin dashboard.
+Official website for Iconic Festival - celebrating the greatest music icons with legendary tribute acts in Goffertpark, Nijmegen.
 
 ## Current Status
 
-✅ **Complete:**
-- Simplicate sync functionality (imports projects from API)
-- Settings page with "Sync Now" button
-- Workflows page UI (project selection, workflow cards)
-- Admin navigation with Workflows link
+✅ **Phase 1 Complete - Foundation Deployed:**
+- Vibrant design system (purple/magenta, orange, blue)
+- Responsive Header & Footer
+- Homepage with 5 sections (Hero, About, Line-up preview, News, CTA)
+- Festival database schema (Artist, NewsArticle, MediaItem)
+- Deployed to Vercel and live
 
-🚧 **Next Steps - Workflow Configuration:**
-1. Add database schema for workflow configurations
-2. Create tRPC mutations to save/load workflow configs
-3. Wire up "Save & Activate" button functionality
-4. Add workflow status indicators per project
-5. Implement workflow execution logic
+⚠️ **PRIORITY - Match PowerPoint Design:**
+- Current sections/layout don't match PowerPoint structure
+- Need to study PowerPoint images and adjust section sequence
+- Focus on section structure and layout patterns, not pixel-perfect design
 
 ## Project Structure
 
 ```
 src/
-├── app/admin/
-│   ├── dashboard/          # Main dashboard with stats
-│   ├── workflows/          # 🆕 Workflow configuration UI (needs save functionality)
-│   ├── settings/           # Settings with Simplicate sync button
-│   └── users/              # User management
-├── server/api/routers/
-│   ├── sync.ts            # 🆕 Simplicate project sync (complete)
-│   ├── projects.ts        # Project CRUD and stats
-│   ├── automation.ts      # Automation logs and stats
-│   └── workflows.ts       # ⚠️ TODO: Create this for workflow config persistence
-├── lib/
-│   ├── simplicate/        # Simplicate API client
-│   └── workflows/         # Workflow execution logic (contract, hours, invoice)
-└── prisma/schema.prisma   # ⚠️ TODO: Add WorkflowConfig model
+├── app/
+│   ├── layout.tsx              # Root layout with Header/Footer
+│   ├── page.tsx                # Homepage (NEEDS: section restructure)
+│   └── globals.css             # Festival design system
+├── components/
+│   ├── layout/
+│   │   ├── header.tsx          # Sticky navigation with mobile menu
+│   │   └── footer.tsx          # Four-column footer
+│   └── ui/                     # 17 shadcn/ui components
+├── server/api/
+│   ├── root.ts                 # tRPC router (empty, ready for data)
+│   └── trpc.ts                 # tRPC configuration
+└── prisma/
+    ├── schema.prisma           # Festival models (Artist, NewsArticle, MediaItem)
+    └── seed.ts                 # Sample festival data
 ```
 
-## Next Implementation: Workflow Configuration Persistence
+## Next Steps: Match PowerPoint Design
 
-### 1. Update Database Schema
-Add to `prisma/schema.prisma`:
-```prisma
-model WorkflowConfig {
-  id        String   @id @default(cuid())
-  projectId String
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+### 1. Study PowerPoint Section Structure
+Location: `design input/extracted/ppt/media/image*.png`
 
-  // Workflow types enabled for this project
-  contractDistribution Boolean @default(false)
-  hoursReminder        Boolean @default(false)
-  invoiceGeneration    Boolean @default(false)
+**Document:**
+- What sections appear on homepage? (in what order?)
+- How are sections laid out? (full-width, grid, contained)
+- Card layouts for artists/news
+- Image/text arrangements
+- Visual separation between sections
 
-  // Configuration for each workflow
-  contractConfig       Json?   // e.g., { "recipients": [...], "template": "..." }
-  hoursReminderConfig  Json?   // e.g., { "reminderDays": [1, 3, 7], "recipients": [...] }
-  invoiceConfig        Json?   // e.g., { "autoApprove": true, "template": "..." }
+### 2. Adjust Homepage Structure
+File: `src/app/page.tsx`
 
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+Current sections:
+1. Hero (large ICONIC branding)
+2. About Iconic (centered text)
+3. Line-up preview (6 cards, 3-col grid)
+4. News preview (3 cards, 3-col grid)
+5. CTA (gradient background)
 
-  @@unique([projectId])
-}
-```
+**Update to match PowerPoint:**
+- Reorder sections if needed
+- Adjust grid layouts (1-col, 2-col, 3-col)
+- Fix spacing between sections
+- Match content width (full vs. contained)
+- Add/remove sections as needed
 
-### 2. Create Workflow Router
-File: `src/server/api/routers/workflows.ts`
-- `saveConfig` mutation: Save workflow configuration for a project
-- `getConfig` query: Get workflow configuration for a project
-- `toggleWorkflow` mutation: Enable/disable specific workflows
-- `getActiveWorkflows` query: Get all projects with active workflows
+### 3. Implement PowerPoint Feedback
 
-### 3. Update Workflows Page
-File: `src/app/admin/workflows/page.tsx`
-- Wire up "Save & Activate" button to `saveConfig` mutation
-- Load existing config on project selection
-- Show enabled workflows with checkmarks
-- Add success/error toast notifications
+**From Slide 1 (Homepage):**
+- Compact layout, less white space
+- Artist cards: add descriptions + "Meer Info" CTA
+- News cards: add descriptions + "Lees meer" CTA
+- Photos: add year labels (2023, 2024)
+- Mix photos and videos in media section
+
+**From Slide 2 (Artist Page):**
+- More compact, to the point
+- Less aggressive ticket CTAs
+- Better content balance
+
+**From Slide 3 (News Article):**
+- Better readability
+- Cleaner typography
+- Better text-to-image ratio
+- One article = one news item
 
 ## Organization Rules
 
-**Workflow Implementation Pattern:**
-- Database schema → `prisma/schema.prisma`
-- Backend mutations/queries → `src/server/api/routers/workflows.ts`
-- Frontend UI → `src/app/admin/workflows/page.tsx`
-- Workflow execution → `src/lib/workflows/[workflow-name].ts`
+**Festival Content Pattern:**
+- Pages → `src/app/[page]/page.tsx`
+- Dynamic routes → `src/app/[page]/[slug]/page.tsx`
+- Components → `src/components/[category]/[name].tsx`
+- Layouts → `src/components/layout/`
 
-**Single responsibility:**
-- One router file per domain (projects, workflows, automation, sync)
-- One workflow execution file per automation type
-- UI components for reusable workflow cards
+**Content Organization:**
+- Media → `public/images/[category]/`
+- Artist photos → `public/images/artists/`
+- News covers → `public/images/news/`
+- Gallery → `public/images/gallery/[year]/`
+
+**Keep focused:**
+- Match section structure from PowerPoint
+- Don't overthink - structure over pixels
+- Test responsive layouts (mobile, tablet, desktop)
 
 ## Code Quality - Zero Tolerance
 
 After editing ANY file, run:
 ```bash
 npm run typecheck    # TypeScript type checking
-npm run lint         # ESLint validation (skip if config issue)
+npm run lint         # ESLint validation
 ```
 
 **Database changes:**
 ```bash
-npm run db:push      # Push schema changes
-npm run db:generate  # Regenerate Prisma client
-npm run dev          # Restart server to load new schema
+npm run db:generate  # Regenerate Prisma client after schema changes
+npm run dev          # Restart dev server
 ```
 
-## Quick Start for Next Task
+## Quick Reference
 
-To implement workflow configuration persistence:
-1. Update `prisma/schema.prisma` with WorkflowConfig model
-2. Run `npm run db:push && npm run db:generate`
-3. Create `src/server/api/routers/workflows.ts`
-4. Add router to `src/server/api/root.ts`
-5. Update `src/app/admin/workflows/page.tsx` to use new mutations
-6. Test: Select project → Enable workflows → Save → Reload page to verify persistence
+**Design System:**
+- Primary: Purple/magenta (280° 70% 50%)
+- Secondary: Orange (30° 95% 55%)
+- Accent: Electric blue (210° 100% 50%)
+- Utilities: `.festival-gradient`, `.btn-festival`, `.section-padding`
+
+**Key URLs:**
+- Live: https://websitev10-9lin2nthd-willem4130s-projects.vercel.app
+- GitHub: https://github.com/willem4130/iconic-festival-website
+- PowerPoint: `design input/Iconic website design.pptx`
