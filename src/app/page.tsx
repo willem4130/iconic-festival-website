@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Script from 'next/script'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -312,40 +313,17 @@ export default function Home() {
 
           {/* LightWidget Embed Container */}
           <div className="max-w-6xl mx-auto">
-            {/*
-              TODO: Replace this div with your LightWidget embed code
-
-              Steps:
-              1. Go to https://lightwidget.com/
-              2. Log in to your account
-              3. Create a new widget for @iconic_festival (https://www.instagram.com/iconic_festival/)
-              4. Choose layout: Grid (3 columns recommended)
-              5. Copy the embed code
-              6. Replace the entire div below with your <script> tag
-
-              Example structure:
-              <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-              <iframe src="//lightwidget.com/widgets/YOUR_WIDGET_ID.html" ...></iframe>
-            */}
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg p-12 text-center">
-              <div className="text-muted-foreground">
-                <div className="text-6xl mb-4">📸</div>
-                <p className="text-lg font-semibold mb-2">
-                  Instagram Feed Placeholder
-                </p>
-                <p className="text-sm max-w-md mx-auto">
-                  Add your LightWidget embed code here from{' '}
-                  <a
-                    href="https://lightwidget.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent hover:underline"
-                  >
-                    lightwidget.com
-                  </a>
-                </p>
-              </div>
-            </div>
+            <Script
+              src="https://cdn.lightwidget.com/widgets/lightwidget.js"
+              strategy="lazyOnload"
+            />
+            <iframe
+              src="//lightwidget.com/widgets/f19c8648025855149a1c16b415009eed.html"
+              scrolling="no"
+              allowTransparency={true}
+              className="lightwidget-widget"
+              style={{ width: '100%', border: 0, overflow: 'hidden' }}
+            />
           </div>
         </div>
       </section>
