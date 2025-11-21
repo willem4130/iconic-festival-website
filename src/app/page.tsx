@@ -98,18 +98,16 @@ export default function Home() {
 
             <div className="relative max-w-xl">
               <p className="text-lg md:text-xl leading-relaxed mb-6">
-                Tributeparty pakt jaarlijks uit met een indrukwekkende line-up
-                van de beste tributebands die er te vinden zijn. Voltallive live
-                bands komen van heinde en verre om een ode te brengen aan hun
-                favoriete muzikanten. Vaak schitteren ze solo in theaters en
-                concertzalen, maar tijdens Tributeparty komen ze samen op één
-                plek, in het prachtige Park Brakkenstein in Nijmegen.
+                Iconic Festival is een jaarlijks tribute muziekfestival in het
+                Goffertpark in Nijmegen. Een muzikaal eerbetoon aan de grootste
+                artiesten ooit door hoogwaardige tribute acts. Van Queen en ABBA
+                tot Bruno Mars en Dua Lipa – we brengen generaties samen rond
+                gedeelde muzikale herinneringen.
               </p>
               <p className="text-lg md:text-xl leading-relaxed mb-8">
-                We starten een tweedaagse reis terug in de tijd langs grote hits,
-                iconische optredens, persoonlijke favorieten, gezelligheid en
-                vriendschap. Omringd door groen vieren we de muziek van jouw
-                helden.
+                Pure herkenning, meezingen, en dat onmiskenbare Iconic gevoel.
+                In 2026 breiden we uit met een tweede podium in het Goffert Theater.
+                Kom samen genieten van de beste tribute acts op 9 mei 2026!
               </p>
 
               <Link href="/tickets">
@@ -139,7 +137,7 @@ export default function Home() {
 
             {/* Photo Caption Overlay */}
             <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 text-xs text-foreground/70">
-              Tributeparty, Nijmegen, Park Brakkenstein
+              Iconic Festival, Goffertpark, Nijmegen
             </div>
           </div>
         </div>
@@ -147,7 +145,7 @@ export default function Home() {
         {/* Bold Statement Banner */}
         <div className="bg-[hsl(280,70%,20%)] text-white text-center py-6 px-4">
           <p className="text-xl md:text-2xl lg:text-3xl font-bold">
-            'HET OUDSTE TRIBUTEFESTIVAL VAN NEDERLAND – SINDS 2006'
+            BEST OF TRIBUTE – 9 MEI 2026 – GOFFERTPARK NIJMEGEN
           </p>
         </div>
       </section>
