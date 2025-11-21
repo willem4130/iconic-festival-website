@@ -13,12 +13,21 @@ import { Ticket, Music, Calendar, MapPin, ArrowRight } from 'lucide-react'
 export default function Home() {
   return (
     <>
-      {/* Hero Section with Background Photo */}
-      <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center">
-        {/* Background Image - Placeholder for now, replace with actual Goffertpark aerial photo */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/30 to-accent/20">
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+      {/* Hero Section with Background Video */}
+      <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden">
+        {/* Background Video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40" />
 
         {/* Hero Content */}
         <div className="relative z-10 container container-padding text-center">
@@ -145,7 +154,7 @@ export default function Home() {
 
       {/* Featured Artists Preview - Carousel */}
       <section className="py-12 md:py-16 bg-accent/10">
-        <div className="container container-padding">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-accent">
               DIT IS DE LINE-UP VAN 2026
@@ -158,12 +167,12 @@ export default function Home() {
           {/* Artist Carousel */}
           <Carousel
             opts={{
-              align: 'start',
+              align: 'center',
               loop: true,
             }}
-            className="w-full max-w-7xl mx-auto"
+            className="w-full max-w-6xl mx-auto"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-3">
               {[
                 'Queen Tribute',
                 'Golden Earring Tribute',
@@ -177,7 +186,7 @@ export default function Home() {
               ].map((artist, index) => (
                 <CarouselItem
                   key={index}
-                  className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  className="pl-3 basis-4/5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 >
                   <Card className="border-4 border-white shadow-lg overflow-hidden hover:scale-105 transition-transform">
                     {/* Artist Image */}
@@ -227,7 +236,7 @@ export default function Home() {
 
       {/* News Preview - Compact */}
       <section className="py-12 md:py-16 bg-background">
-        <div className="container container-padding">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">
               Laatste Nieuws
@@ -235,7 +244,7 @@ export default function Home() {
           </div>
 
           {/* News Grid - Compact Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               {
                 date: '15 Nov 2025',
