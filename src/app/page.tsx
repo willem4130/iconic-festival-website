@@ -298,6 +298,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Instagram Feed - LightWidget */}
+      <section className="py-12 md:py-16 bg-muted/30">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+              Volg Ons Op Instagram
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              @iconicfestival - Bekijk sfeerimpressies en blijf op de hoogte
+            </p>
+          </div>
+
+          {/* LightWidget Embed Container */}
+          <div className="max-w-6xl mx-auto">
+            {/*
+              TODO: Replace this div with your LightWidget embed code
+
+              Steps:
+              1. Go to https://lightwidget.com/
+              2. Log in to your account
+              3. Create a new widget for @iconicfestival
+              4. Choose layout: Grid (3 columns recommended)
+              5. Copy the embed code
+              6. Replace the entire div below with your <script> tag
+
+              Example structure:
+              <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+              <iframe src="//lightwidget.com/widgets/YOUR_WIDGET_ID.html" ...></iframe>
+            */}
+            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg p-12 text-center">
+              <div className="text-muted-foreground">
+                <div className="text-6xl mb-4">📸</div>
+                <p className="text-lg font-semibold mb-2">
+                  Instagram Feed Placeholder
+                </p>
+                <p className="text-sm max-w-md mx-auto">
+                  Add your LightWidget embed code here from{' '}
+                  <a
+                    href="https://lightwidget.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    lightwidget.com
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section - Compact */}
       <section className="py-12 md:py-16 festival-gradient text-white">
         <div className="container container-padding text-center">
