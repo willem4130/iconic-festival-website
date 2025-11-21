@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import Script from 'next/script'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import {
@@ -36,9 +39,12 @@ export default function Home() {
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-2 text-white drop-shadow-lg">
               ICONIC
             </h1>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+            <motion.h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg"
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            >
               FESTIVAL
-            </h2>
+            </motion.h2>
             <p className="text-2xl md:text-3xl font-bold text-secondary mt-2 drop-shadow-lg">
               BEST OF TRIBUTE
             </p>
@@ -155,9 +161,12 @@ export default function Home() {
       <section className="py-12 md:py-16 bg-accent/10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-accent">
+            <motion.h2
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-accent"
+              whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
+            >
               DIT IS DE LINE-UP VAN 2026
-            </h2>
+            </motion.h2>
             <p className="text-xl md:text-2xl font-semibold text-foreground/70">
               MAINSTAGE
             </p>
@@ -237,9 +246,12 @@ export default function Home() {
       <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold mb-2"
+              whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
+            >
               Laatste Nieuws
-            </h2>
+            </motion.h2>
           </div>
 
           {/* News Grid - Compact Cards */}
@@ -303,9 +315,12 @@ export default function Home() {
       <section className="py-12 md:py-16 bg-muted/30">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold mb-2"
+              whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
+            >
               Volg Ons Op Instagram
-            </h2>
+            </motion.h2>
             <p className="text-lg text-muted-foreground">
               @iconic_festival - Bekijk sfeerimpressies en blijf op de hoogte
             </p>
@@ -318,7 +333,7 @@ export default function Home() {
               strategy="lazyOnload"
             />
             <iframe
-              src="//lightwidget.com/widgets/f19c8648025855149a1c16b415009eed.html"
+              src="//lightwidget.com/widgets/eb64db92bd805ab287d364ea964612aa.html"
               scrolling="no"
               allowTransparency={true}
               className="lightwidget-widget"
@@ -331,9 +346,12 @@ export default function Home() {
       {/* CTA Section - Compact */}
       <section className="py-12 md:py-16 festival-gradient text-white">
         <div className="container container-padding text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
+          >
             Mis Het Niet!
-          </h2>
+          </motion.h2>
           <p className="text-lg md:text-xl mb-6 max-w-2xl mx-auto text-white/90">
             9 Mei 2026 in Goffertpark, Nijmegen. Koop nu je tickets!
           </p>
