@@ -1,0 +1,158 @@
+// Prisma schema for Iconic Festival Website
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==========================================
+// FESTIVAL CONTENT MODELS
+// ==========================================
+
+model Artist {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String   // Short description for cards
+  bio         String   // Full biography
+  imageUrl    String
+  videoUrl    String?
+
+  // Performance details
+  year        Int      // 2024, 2025, etc.
+  performanceDate DateTime?
+  performanceTime String?
+
+  // Display order
+  order       Int      @default(0)
+  featured    Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([year])
+  @@index([featured])
+  @@index([order])
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String   // Short preview text
+  content     String   // Full article content (markdown or HTML)
+  coverImage  String
+
+  // Author & publishing
+  author      String?
+  publishedAt DateTime
+  featured    Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([publishedAt])
+  @@index([featured])
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+model MediaItem {
+  id           String    @id @default(cuid())
+  type         MediaType
+  title        String
+  url          String
+  thumbnailUrl String?
+
+  // Organization
+  year         Int       // 2023, 2024, etc.
+  category     String?   // e.g., "atmosphere", "performances", "behind-the-scenes"
+
+  // Display order
+  order        Int       @default(0)
+  featured     Boolean   @default(false)
+
+  createdAt    DateTime  @default(now())
+
+  @@index([type])
+  @@index([year])
+  @@index([featured])
+  @@index([order])
+}
+
+// ==========================================
+// OPTIONAL: USER & AUTHENTICATION
+// (Keep if admin panel is needed)
+// ==========================================
+
+enum UserRole {
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  role          UserRole  @default(EDITOR)
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+
+  @@index([email])
+}
+
+// NextAuth models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
