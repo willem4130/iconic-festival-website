@@ -117,4 +117,18 @@
   .btn-festival-secondary {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-all duration-300 rounded-lg px-6 py-3 font-semibold;
   }
+
+  /* Marquee animation for scrolling text */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
 }
