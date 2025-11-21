@@ -306,7 +306,7 @@ export default function Home() {
               Volg Ons Op Instagram
             </h2>
             <p className="text-lg text-muted-foreground">
-              @iconicfestival - Bekijk sfeerimpressies en blijf op de hoogte
+              @iconic_festival - Bekijk sfeerimpressies en blijf op de hoogte
             </p>
           </div>
 
@@ -318,7 +318,7 @@ export default function Home() {
               Steps:
               1. Go to https://lightwidget.com/
               2. Log in to your account
-              3. Create a new widget for @iconicfestival
+              3. Create a new widget for @iconic_festival (https://www.instagram.com/iconic_festival/)
               4. Choose layout: Grid (3 columns recommended)
               5. Copy the embed code
               6. Replace the entire div below with your <script> tag
