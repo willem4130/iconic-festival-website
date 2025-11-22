@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import Script from 'next/script'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -12,7 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import { Ticket, Music, Calendar, MapPin, ArrowRight } from 'lucide-react'
+import { Ticket, Music, Calendar, MapPin, ArrowRight, Users, Gift, CreditCard, Clock } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -35,29 +36,70 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 container container-padding text-center">
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-2 text-white drop-shadow-lg">
-              ICONIC
-            </h1>
-            <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg"
-              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-            >
-              FESTIVAL
-            </motion.h2>
-            <p className="text-2xl md:text-3xl font-bold text-secondary mt-2 drop-shadow-lg">
-              BEST OF TRIBUTE
-            </p>
-          </div>
+          {/* Animated Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20, rotate: 0 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              rotate: [0, 0, 360, 360]
+            }}
+            transition={{
+              duration: 2,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.2,
+              rotate: {
+                duration: 1.2,
+                ease: "easeInOut",
+                times: [0, 0.3, 0.7, 1]
+              }
+            }}
+            className="mb-8 flex justify-center"
+          >
+            <Image
+              src="/images/logos/Logo-Iconic.png"
+              alt="Iconic Festival"
+              width={600}
+              height={400}
+              priority
+              className="w-full max-w-md md:max-w-lg lg:max-w-2xl h-auto drop-shadow-2xl"
+            />
+          </motion.div>
 
-          <Link href="/tickets">
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-white text-lg px-12 py-6 font-bold shadow-xl"
-            >
-              TICKETS
-            </Button>
-          </Link>
+          {/* Tagline */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 0.8
+            }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-8 drop-shadow-lg"
+          >
+            BEST OF TRIBUTE
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 1.2
+            }}
+          >
+            <Link href="/tickets">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-white text-lg px-12 py-6 font-bold shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              >
+                TICKETS
+              </Button>
+            </Link>
+          </motion.div>
         </div>
 
         {/* Scrolling Marquee - Event Info */}
@@ -94,8 +136,154 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Artists Preview - Carousel */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="py-12 md:py-16 bg-accent/10"
+      >
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <motion.h2
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-accent"
+              whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
+            >
+              DIT IS DE LINE-UP VAN 2026
+            </motion.h2>
+            <p className="text-xl md:text-2xl font-semibold text-foreground/70">
+              MAINSTAGE
+            </p>
+          </div>
+
+          {/* Artist Carousel */}
+          <Carousel
+            opts={{
+              align: 'center',
+              loop: true,
+            }}
+            className="w-full max-w-7xl mx-auto"
+          >
+            <CarouselContent className="-ml-3">
+              {[
+                {
+                  name: 'Queen Tribute',
+                  slug: 'queen-tribute',
+                  description: 'De ultieme Queen ervaring met alle klassiekers. We Will Rock You, Bohemian Rhapsody en meer hits.',
+                },
+                {
+                  name: 'Golden Earring Tribute',
+                  slug: 'golden-earring-tribute',
+                  description: 'Nederlands rock erfgoed met Radar Love en Twilight Zone. Pure nostalgie en energie.',
+                },
+                {
+                  name: 'Urban Soulitude – Anouk Tribute',
+                  slug: 'anouk-tribute',
+                  description: 'De krachtige stem en rauwe emotie van Anouk. Girl, Nobody\'s Wife en alle grote hits.',
+                },
+                {
+                  name: 'Mystery Band',
+                  slug: 'mystery-band',
+                  description: 'Een speciale verrassing die we binnenkort aankondigen. Blijf op de hoogte via onze socials!',
+                },
+                {
+                  name: 'Donna Summer Tribute',
+                  slug: 'donna-summer-tribute',
+                  description: 'De Queen of Disco lives! Hot Stuff, I Feel Love en alle disco classics voor een onvergetelijke avond.',
+                },
+                {
+                  name: 'Coldplay Tribute',
+                  slug: 'coldplay-tribute',
+                  description: 'Fix You, Yellow en Viva La Vida. De magische sfeer van Coldplay in het Goffertpark.',
+                },
+                {
+                  name: 'Pink Floyd Tribute',
+                  slug: 'pink-floyd-tribute',
+                  description: 'Psychedelisch spektakel met Comfortably Numb en Wish You Were Here. Een audiovisuele reis.',
+                },
+                {
+                  name: 'Fleetwood Mac Tribute',
+                  slug: 'fleetwood-mac-tribute',
+                  description: 'Dreams, Go Your Own Way en The Chain. De tijdloze magie van Fleetwood Mac herleeft.',
+                },
+                {
+                  name: 'ABBA Tribute',
+                  slug: 'abba-tribute',
+                  description: 'Dancing Queen, Mamma Mia en Waterloo. De ultieme ABBA party voor alle generaties.',
+                },
+              ].map((artist, index) => (
+                <CarouselItem
+                  key={index}
+                  className="pl-3 basis-4/5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                >
+                  <Card className="border-4 border-white shadow-lg overflow-hidden hover:scale-105 transition-transform flex flex-col h-full">
+                    {/* Artist Image */}
+                    <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center relative">
+                      <Music className="h-20 w-20 text-muted-foreground/40" />
+                      {/* Placeholder text */}
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                        <p className="text-xs text-white/70 text-center px-4">
+                          Artist Photo<br />
+                          Add to: public/images/artists/
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Artist Info */}
+                    <div className="bg-white p-4 text-center border-t-4 border-accent flex flex-col flex-grow">
+                      <h3 className="font-bold text-base md:text-lg text-foreground mb-2">
+                        {artist.name}
+                      </h3>
+                      <p className="text-xs md:text-sm text-muted-foreground mb-3 flex-grow">
+                        {artist.description}
+                      </p>
+                      <Link href={`/line-up/${artist.slug}`}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="w-full border-accent text-accent hover:bg-accent hover:text-white"
+                        >
+                          Meer Info
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
+
+          {/* Dot Navigation Indicators - Visual only */}
+          <div className="flex justify-center gap-2 mt-8">
+            {[...Array(9)].map((_, i) => (
+              <div
+                key={i}
+                className={`w-2 h-2 rounded-full ${
+                  i === 0 ? 'bg-secondary' : 'bg-accent'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Decorative zigzag pattern */}
+        <div className="mt-8 h-8 bg-primary/20" style={{
+          clipPath: 'polygon(0 0, 5% 100%, 10% 0, 15% 100%, 20% 0, 25% 100%, 30% 0, 35% 100%, 40% 0, 45% 100%, 50% 0, 55% 100%, 60% 0, 65% 100%, 70% 0, 75% 100%, 80% 0, 85% 100%, 90% 0, 95% 100%, 100% 0)'
+        }} />
+      </motion.section>
+
       {/* About Iconic Section - Split Layout */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[hsl(15,90%,55%)] to-[hsl(15,85%,50%)]">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1 }}
+        className="relative overflow-hidden bg-gradient-to-r from-[hsl(15,90%,55%)] to-[hsl(15,85%,50%)]"
+      >
         <div className="grid lg:grid-cols-2 min-h-[500px]">
           {/* Left: Text Content */}
           <div className="relative z-10 flex items-center p-8 md:p-12 lg:p-16 text-white">
@@ -155,92 +343,127 @@ export default function Home() {
             BEST OF TRIBUTE – 9 MEI 2026 – GOFFERTPARK NIJMEGEN
           </p>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Featured Artists Preview - Carousel */}
-      <section className="py-12 md:py-16 bg-accent/10">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="text-center mb-8">
+      {/* Ticket Info Section - Compact 2 Columns */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="py-16 md:py-20 bg-background relative overflow-hidden"
+      >
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
+        <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-secondary/10 blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-64 h-64 rounded-full bg-accent/10 blur-3xl" />
+
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+          {/* Section Title */}
+          <div className="text-center mb-12">
             <motion.h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-accent"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-accent"
               whileHover={{ scale: 1.05, y: -5, transition: { duration: 0.3 } }}
             >
-              DIT IS DE LINE-UP VAN 2026
+              Tickets
             </motion.h2>
-            <p className="text-xl md:text-2xl font-semibold text-foreground/70">
-              MAINSTAGE
-            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-accent to-secondary mx-auto" />
           </div>
 
-          {/* Artist Carousel */}
-          <Carousel
-            opts={{
-              align: 'center',
-              loop: true,
-            }}
-            className="w-full max-w-6xl mx-auto"
-          >
-            <CarouselContent className="-ml-3">
-              {[
-                'Queen Tribute',
-                'Golden Earring Tribute',
-                'Urban Soulitude – Anouk Tribute',
-                'Mystery Band',
-                'Donna Summer Tribute',
-                'Coldplay Tribute',
-                'Pink Floyd Tribute',
-                'Fleetwood Mac Tribute',
-                'ABBA Tribute',
-              ].map((artist, index) => (
-                <CarouselItem
-                  key={index}
-                  className="pl-3 basis-4/5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Left Column - General Text & Info */}
+            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 border border-accent/10 shadow-lg">
+              <p className="text-lg md:text-xl leading-relaxed mb-6 text-foreground/90">
+                Secure je plek voor het festival van het jaar! Tickets zijn
+                verkrijgbaar via onze officiële ticketpartner. Profiteer van
+                vroegboekkorting en speciale aanbiedingen voor gezinnen en groepen.
+              </p>
+              <p className="text-base md:text-lg leading-relaxed mb-8 text-muted-foreground">
+                Kinderen t/m 11 jaar hebben gratis toegang. Officiële tickets
+                zijn uitsluitend verkrijgbaar via de ticketpagina op onze website.
+                Kun je niet meer? Tickets zijn eenvoudig door te verkopen via
+                onze partner Ticketswap.
+              </p>
+              <Link href="/tickets">
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-white font-bold w-full md:w-auto"
                 >
-                  <Card className="border-4 border-white shadow-lg overflow-hidden hover:scale-105 transition-transform">
-                    {/* Artist Image */}
-                    <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center relative">
-                      <Music className="h-20 w-20 text-muted-foreground/40" />
-                      {/* Placeholder text */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                        <p className="text-xs text-white/70 text-center px-4">
-                          Artist Photo<br />
-                          Add to: public/images/artists/
-                        </p>
-                      </div>
-                    </div>
+                  <Ticket className="mr-2 h-5 w-5" />
+                  Bekijk Alle Tickets
+                </Button>
+              </Link>
+            </div>
 
-                    {/* Artist Name */}
-                    <div className="bg-white p-4 text-center border-t-4 border-accent">
-                      <h3 className="font-bold text-base md:text-lg text-foreground">
-                        {artist}
-                      </h3>
-                    </div>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
-          </Carousel>
+            {/* Right Column - Ticket Types */}
+            <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 border border-accent/10 shadow-lg">
+              <h3 className="text-2xl font-bold mb-6 text-foreground">
+                Ticket Opties
+              </h3>
+              <div className="space-y-4">
+                {/* General Admission */}
+                <div className="flex items-start gap-3 pb-4 border-b border-accent/10">
+                  <Ticket className="h-5 w-5 text-accent mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Algemene Toegang</h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Toegang tot alle podia en activiteiten
+                    </p>
+                    <p className="font-semibold text-accent">Vanaf €49,50</p>
+                  </div>
+                </div>
 
-          {/* Dot Navigation Indicators - Visual only */}
-          <div className="flex justify-center gap-2 mt-8">
-            {[...Array(9)].map((_, i) => (
-              <div
-                key={i}
-                className={`w-2 h-2 rounded-full ${
-                  i === 0 ? 'bg-secondary' : 'bg-accent'
-                }`}
-              />
-            ))}
+                {/* Family Tickets */}
+                <div className="flex items-start gap-3 pb-4 border-b border-accent/10">
+                  <Users className="h-5 w-5 text-secondary mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Familieticket</h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      2 volwassenen + 2 kinderen (tot 18 jaar)
+                    </p>
+                    <p className="font-semibold text-secondary">Vanaf €139,00</p>
+                  </div>
+                </div>
+
+                {/* Group Tickets */}
+                <div className="flex items-start gap-3 pb-4 border-b border-accent/10">
+                  <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Groepstickets</h4>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      Vanaf 10 personen - speciale tarieven
+                    </p>
+                    <p className="font-semibold text-primary">Op aanvraag</p>
+                  </div>
+                </div>
+
+                {/* Children */}
+                <div className="flex items-start gap-3 pb-4 border-b border-accent/10">
+                  <Gift className="h-5 w-5 text-accent mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Kinderen</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Tot 11 jaar: <span className="font-semibold text-green-600">GRATIS</span><br />
+                      Vanaf 12 jaar: regulier ticket
+                    </p>
+                  </div>
+                </div>
+
+                {/* Early Bird */}
+                <div className="flex items-start gap-3">
+                  <Clock className="h-5 w-5 text-secondary mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <h4 className="font-bold text-base mb-1">Early Bird</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Vroegboekkorting - hoe eerder, hoe voordeliger!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Decorative zigzag pattern */}
-        <div className="mt-8 h-8 bg-primary/20" style={{
-          clipPath: 'polygon(0 0, 5% 100%, 10% 0, 15% 100%, 20% 0, 25% 100%, 30% 0, 35% 100%, 40% 0, 45% 100%, 50% 0, 55% 100%, 60% 0, 65% 100%, 70% 0, 75% 100%, 80% 0, 85% 100%, 90% 0, 95% 100%, 100% 0)'
-        }} />
-      </section>
+      </motion.section>
 
       {/* News Preview - Compact */}
       <section className="py-12 md:py-16 bg-background">
@@ -335,7 +558,6 @@ export default function Home() {
             <iframe
               src="//lightwidget.com/widgets/eb64db92bd805ab287d364ea964612aa.html"
               scrolling="no"
-              allowTransparency={true}
               className="lightwidget-widget"
               style={{ width: '100%', border: 0, overflow: 'hidden' }}
             />
